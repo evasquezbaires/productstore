@@ -8,7 +8,7 @@ namespace ProductStore.Api.Domain.Entities
         /// <summary>
         /// Unique Id to assign at the Entity
         /// </summary>
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         /// <summary>
         /// Date when the new entity was created

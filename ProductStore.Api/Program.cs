@@ -1,48 +1,32 @@
-using Microsoft.OpenApi.Models;
-using System.Reflection;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using ProductStore.Api.Configuration;
+using ProductStore.Api.Domain.Mappers;
+using ProductStore.Api.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddApiVersioning();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1",
-        new OpenApiInfo()
-        {
-            Title = "ProductStore API Documentation",
-            Version = "v1.0",
-            Description = "Perform different actions over stock items on the Store",
-            Contact = new OpenApiContact()
-            {
-                Name = "Edwin Vásquez",
-                Email = "edwin.vasquez.osorio@gmail.com"
-            }
-        }
-     );
 
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-});
+builder.Services.AddSwagger();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ProductProfile).Assembly));
+builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
+builder.Services.AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("LocalStorage"));
+
+builder.Services.AddIoC(builder.Configuration);
 
 var app = builder.Build();
-
+var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
+app.UseSwaggerPage(provider);
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

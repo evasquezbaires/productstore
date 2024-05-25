@@ -12,7 +12,7 @@ namespace ProductStore.Api.Repository
         private readonly Lazy<DbSet<Product>> _dbSet;
         private readonly DbContext _dbContext;
 
-        protected ProductRepository(DatabaseContext dbContext)
+        public ProductRepository(DatabaseContext dbContext)
         {
             if (dbContext == null)
             {

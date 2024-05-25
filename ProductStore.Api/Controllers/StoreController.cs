@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductStore.Api.Model;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace ProductStore.Api.Controllers
@@ -9,6 +10,7 @@ namespace ProductStore.Api.Controllers
     /// <summary>
     /// Controls operation over stock items on the Store.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
@@ -28,8 +30,7 @@ namespace ProductStore.Api.Controllers
         /// <summary>
         /// Creates a new Product and persist it into the repository.
         /// </summary>
-        [HttpPost]
-        [Route("SaveProduct")]
+        [HttpPost("SaveProduct")]
         [SwaggerResponse(201, "The request was validated and processed successfully.")]
         [SwaggerResponse(400, "The request has one or more validation issues that can be resolved by the requester.")]
         [SwaggerResponse(500, "The request raised an internal server error that should be analyzed and resolved by the developers.")]
@@ -42,8 +43,7 @@ namespace ProductStore.Api.Controllers
         /// <summary>
         /// Updates an existing Product and persist it into the repository.
         /// </summary>
-        [HttpPut]
-        [Route("UpdateProduct")]
+        [HttpPut("UpdateProduct/{id}")]
         [SwaggerResponse(200, "The request was validated and processed successfully.")]
         [SwaggerResponse(400, "The request has one or more validation issues that can be resolved by the requester.")]
         [SwaggerResponse(500, "The request raised an internal server error that should be analyzed and resolved by the developers.")]
@@ -57,14 +57,14 @@ namespace ProductStore.Api.Controllers
         /// <summary>
         /// Lists a single Product filtered by Id.
         /// </summary>
-        [HttpGet]
-        [Route("GetProduct/{id}")]
+        [HttpGet("GetProduct/{id}")]
         [SwaggerResponse(200, "The request was validated and processed successfully.", typeof(ProductRead))]
         [SwaggerResponse(400, "The request has one or more validation issues that can be resolved by the requester.")]
         [SwaggerResponse(500, "The request raised an internal server error that should be analyzed and resolved by the developers.")]
-        public async Task<IActionResult> GetById([FromRoute] ProductQuery id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var model = await _mediator.Send(id);
+            var request = new ProductQuery { Id = id };
+            var model = await _mediator.Send(request);
 
             return Ok(model);
         }

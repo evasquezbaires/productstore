@@ -24,6 +24,7 @@ namespace ProductStore.Api.Repository
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Product> Products => Set<Product>();
