@@ -16,6 +16,7 @@ builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
 builder.Services.AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("LocalStorage"));
 
 builder.Services.AddIoC(builder.Configuration);
+SerilogConfiguration.Configure(builder.Host, builder.Configuration);
 
 var app = builder.Build();
 var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();

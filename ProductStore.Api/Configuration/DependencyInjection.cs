@@ -1,4 +1,6 @@
-﻿using ProductStore.Api.Domain.Contracts;
+﻿using MediatR;
+using ProductStore.Api.Domain.Behaviors;
+using ProductStore.Api.Domain.Contracts;
 using ProductStore.Api.Repository;
 using System.Diagnostics.CodeAnalysis;
 
@@ -20,6 +22,8 @@ namespace ProductStore.Api.Configuration
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
 
             return services;
         }

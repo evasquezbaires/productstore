@@ -1,0 +1,14 @@
+2024-05-25 00:01:46.009 -05:00 [INF] Now listening on: http://localhost:5215
+2024-05-25 00:01:46.043 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-05-25 00:01:46.045 -05:00 [INF] Hosting environment: Development
+2024-05-25 00:01:46.046 -05:00 [INF] Content root path: C:\Users\edwin\source\repos\productstore\ProductStore.Api
+2024-05-25 00:01:54.409 -05:00 [INF] STARTING Request for: ProductQuery
+2024-05-25 00:01:54.749 -05:00 [INF] Entity Framework Core 6.0.3 initialized 'DatabaseContext' using provider 'Microsoft.EntityFrameworkCore.Sqlite:6.0.3' with options: None
+2024-05-25 00:01:54.845 -05:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*) FROM "sqlite_master" WHERE "type" = 'table' AND "rootpage" IS NOT NULL;
+2024-05-25 00:01:59.292 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Code", "p"."CreatedDate", "p"."Description", "p"."Name", "p"."Price", "p"."StatusCode", "p"."Stock", "p"."UpdatedDate"
+FROM "Products" AS "p"
+WHERE "p"."Id" = @__id_0
+LIMIT 1
+2024-05-25 00:02:03.337 -05:00 [INF] FINISH Request for: ProductQuery with a duration: 8928.0345 ms

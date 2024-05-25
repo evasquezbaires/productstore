@@ -12,6 +12,10 @@ namespace ProductStore.Api.Configuration
     [ExcludeFromCodeCoverage]
     public static class SwaggerConfiguration
     {
+        /// <summary>
+        /// Allows to inject the necessary dependencies for Swagger configuration
+        /// </summary>
+        /// <param name="services">Services of the application</param>
         public static void AddSwagger(this IServiceCollection services)
         {
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
