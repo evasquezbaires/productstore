@@ -13,12 +13,16 @@ namespace ProductStore.Api.Domain.Handlers
     public class GetProductQueryHandler : IRequestHandler<ProductQuery, ProductRead>
     {
         private readonly IProductRepository _repository;
+        private readonly IDiscountClient _discountClient;
+        private readonly ICacheService _cacheService;
         private readonly IMapper _mapper;
 
-        public GetProductQueryHandler(IProductRepository repository, IMapper mapper)
+        public GetProductQueryHandler(IProductRepository repository, IDiscountClient discountClient, ICacheService cacheService, IMapper mapper)
         {
             _repository = repository;
-            _mapper = mapper;
+            _discountClient = discountClient;
+            _cacheService = cacheService;
+            _mapper = mapper;            
         }
 
         public async Task<ProductRead> Handle(ProductQuery request, CancellationToken cancellationToken)
@@ -32,6 +36,10 @@ namespace ProductStore.Api.Domain.Handlers
                 }
 
                 var productMapped = _mapper.Map<ProductRead>(existingProduct);
+                productMapped.Discount = await _discountClient.GetDiscount(request.Id);
+                productMapped.FinalPrice = productMapped.Price * (100 - productMapped.Discount) / 100;
+                productMapped.StatusName = await _cacheService.CheckCache(existingProduct.StatusCode.ToString());
+
                 return productMapped;
             }
             catch (Exception ex)

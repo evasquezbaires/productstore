@@ -37,6 +37,6 @@ namespace ProductStore.Api.Domain.Entities
         /// <summary>
         /// The current status of the product
         /// </summary>
-        public Status StatusCode { get; set; }
+        public int StatusCode { get; set; }
     }
 }

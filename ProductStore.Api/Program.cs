@@ -10,12 +10,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwagger();
+builder.Services.AddHttpClient();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(ProductProfile).Assembly));
 builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
 builder.Services.AddSqlite<DatabaseContext>(builder.Configuration.GetConnectionString("LocalStorage"));
 
 builder.Services.AddIoC(builder.Configuration);
+builder.Services.ConfigureCache(builder.Configuration);
 SerilogConfiguration.Configure(builder.Host, builder.Configuration);
 
 var app = builder.Build();

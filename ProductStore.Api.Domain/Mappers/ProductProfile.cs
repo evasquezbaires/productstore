@@ -8,8 +8,7 @@ namespace ProductStore.Api.Domain.Mappers
     {
         public ProductProfile()
         {
-            CreateMap<Product, ProductRead>()
-                .ForMember(dest => dest.StatusName, opt => opt.MapFrom(src => src.StatusCode.ToString()));
+            CreateMap<Product, ProductRead>();
             CreateMap<ProductWrite, Product>();
             CreateMap<ProductUpdate, Product>();
         }

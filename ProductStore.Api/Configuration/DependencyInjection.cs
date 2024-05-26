@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using ProductStore.Api.Cache;
+using ProductStore.Api.Client;
 using ProductStore.Api.Domain.Behaviors;
 using ProductStore.Api.Domain.Contracts;
 using ProductStore.Api.Repository;
@@ -24,6 +26,11 @@ namespace ProductStore.Api.Configuration
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+
+            services.Configure<DiscountClientConfiguration>(configuration.GetSection("DiscountApi"));
+            services.AddScoped<IDiscountClient, DiscountClient>();
+
+            services.AddScoped<ICacheService, StatusCacheService>();
 
             return services;
         }
