@@ -44,3 +44,7 @@ bld/
 
 # Visual Studio cache/options directory
 .vs/
+
+
+*.db
+[Ll]ogs/
