@@ -13,11 +13,11 @@ namespace ProductStore.Api.Domain.Handlers
     public class GetProductQueryHandler : IRequestHandler<ProductQuery, ProductRead>
     {
         private readonly IProductRepository _repository;
-        private readonly IDiscountClient _discountClient;
+        private readonly IDiscountClientService _discountClient;
         private readonly ICacheService _cacheService;
         private readonly IMapper _mapper;
 
-        public GetProductQueryHandler(IProductRepository repository, IDiscountClient discountClient, ICacheService cacheService, IMapper mapper)
+        public GetProductQueryHandler(IProductRepository repository, IDiscountClientService discountClient, ICacheService cacheService, IMapper mapper)
         {
             _repository = repository;
             _discountClient = discountClient;

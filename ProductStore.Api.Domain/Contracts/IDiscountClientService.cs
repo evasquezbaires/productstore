@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface to define communication with external service for the Discount
     /// </summary>
-    public interface IDiscountClient
+    public interface IDiscountClientService
     {
         /// <summary>
         /// Gets the discount by external service invocation

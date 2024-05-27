@@ -7,12 +7,12 @@ namespace ProductStore.Api.Client
     /// <summary>
     /// Implements communication with external service for the Discount
     /// </summary>
-    public class DiscountClient : IDiscountClient
+    public class DiscountClientService : IDiscountClientService
     {
         private readonly HttpClient _client;
         private readonly DiscountClientConfiguration _clientConfig;
 
-        public DiscountClient(IHttpClientFactory clientFactory, IOptions<DiscountClientConfiguration> configuration) 
+        public DiscountClientService(IHttpClientFactory clientFactory, IOptions<DiscountClientConfiguration> configuration) 
         {
             _client = clientFactory.CreateClient();
             _clientConfig = configuration.Value;
