@@ -44,12 +44,13 @@ This project's primary goal is to support some functions within an API Service f
 
 1. Open the `productstore.sln` solution using Visual Studio 2022 IDE.
 2. Verify that the solution can be opened and its dependent projects load correctly.
-   - Otherwise, check if the `.net8.0` framework is available
+   - Otherwise, check if the `.net8.0` framework is available.
 3. Verify that the `ProductStore.Api` project is marked as the startup project.
 4. Run the project with Visual Studio and wait for it to load in your browser.
    - If there is any problem with this execution, validate that the required Nuget packages have been restored correctly.
 5. Different requests (`POST`, `PUT`, `GET`) can be operated directly from the Swagger window of the browser.
    - The Swagger documentation automatically offers examples of the expected _schemas_, so you would only need to modify the data as needed.
+   - There is also a _ProductStore.Api.http_ file prepared with an initial sample to invoke the service.
 6. Validating its functionality:
    - If there is any validation error with the sent _request_ it will be shown in the Swagger window.
    - If any exception occurs in the transaction of the _request_ or _response_ it will be shown in the Swagger window.

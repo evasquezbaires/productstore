@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "http": {
+    "ProductStore.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

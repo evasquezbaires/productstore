@@ -1,6 +1,35 @@
-@ProductStore.Api_HostAddress = http://localhost:5215
+@ProductStoreApi_HostAddress = http://localhost:5215/api/v1/Store
+# You can change this productId whit a new one Id
+@productId = d8409e09-cd67-4140-9656-7ace1baabad5
+### Create a new Product
+POST {{ProductStoreApi_HostAddress}}/SaveProduct
+Content-Type: application/json
 
-GET {{ProductStore.Api_HostAddress}}/weatherforecast/
+{
+  "code": "0001263",
+  "name": "Hat",
+  "stock": 10,
+  "description": "Rustic Plastic Hat",
+  "price": 200,
+  "statusCode": 1
+}
+
+### Update an existing Product
+PUT {{ProductStoreApi_HostAddress}}/UpdateProduct/{{productId}}
+Content-Type: application/json
+
+{
+  "code": "0001263",
+  "name": "Shoes",
+  "stock": 10,
+  "description": "Incredible Rubber Shoes",
+  "price": 200,
+  "statusCode": 1,
+  "id": "{{productId}}"
+}
+
+### Get a Product by Id
+GET {{ProductStoreApi_HostAddress}}/GetProduct/{{productId}}
 Accept: application/json
 
 ###
