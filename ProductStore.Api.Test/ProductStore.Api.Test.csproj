@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -10,10 +10,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Bogus" Version="34.0.2" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductStore.Api.Cache\ProductStore.Api.Cache.csproj" />
+    <ProjectReference Include="..\ProductStore.Api.Client\ProductStore.Api.Client.csproj" />
+    <ProjectReference Include="..\ProductStore.Api.Database\ProductStore.Api.Repository.csproj" />
+    <ProjectReference Include="..\ProductStore.Api\ProductStore.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,7 @@ namespace ProductStore.Api.Cache
 
         public Task Save(string key, string value)
         {
-            _cache.Add(key, value);
+            _cache.Add<string>(key, value, null);
 
             return Task.CompletedTask;
         }

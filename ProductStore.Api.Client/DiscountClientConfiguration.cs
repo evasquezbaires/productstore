@@ -1,8 +1,11 @@
-﻿namespace ProductStore.Api.Client
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ProductStore.Api.Client
 {
     /// <summary>
     /// Represents the configuration for the client Discount
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class DiscountClientConfiguration
     {
         /// <summary>
