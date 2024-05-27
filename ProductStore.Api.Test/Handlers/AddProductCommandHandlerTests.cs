@@ -17,8 +17,11 @@ namespace ProductStore.Api.Test.Handlers
         {
             // Arrange
             var productWrite = FakeModels.GetFakeProductWrite();
+            var newProduct = FakeEntities.GetFakeProduct();
 
             var repositoryMock = new Mock<IProductRepository>();
+            repositoryMock.Setup(repo => repo.AddProduct(It.IsAny<Product>(), default)).ReturnsAsync(newProduct);
+
             var unitOfWorkMock = new Mock<IUnitOfWork>();
             var mapperMock = new Mock<IMapper>();
 

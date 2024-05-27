@@ -10,7 +10,7 @@ namespace ProductStore.Api.Domain.Handlers
     /// <summary>
     /// Class to operate with the Insert command of new products
     /// </summary>
-    public class AddProductCommandHandler : IRequestHandler<ProductWrite>
+    public class AddProductCommandHandler : IRequestHandler<ProductWrite, ProductQuery>
     {
         private readonly IProductRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -23,23 +23,23 @@ namespace ProductStore.Api.Domain.Handlers
             _mapper = mapper;
         }
 
-        public async Task Handle(ProductWrite request, CancellationToken cancellationToken)
+        public async Task<ProductQuery> Handle(ProductWrite request, CancellationToken cancellationToken)
         {
             try
             {
                 var newProduct = _mapper.Map<Product>(request);
 
-                await _repository.AddProduct(newProduct);
+                newProduct = await _repository.AddProduct(newProduct);
 
                 await _unitOfWork.CommitAsync();
+
+                return new ProductQuery { Id = newProduct.Id };
             }
             catch (Exception ex)
             {
                 await _unitOfWork.Rollback();
                 throw new DomainException(ex.Message);
             }
-
-            return;
         }
     }
 }

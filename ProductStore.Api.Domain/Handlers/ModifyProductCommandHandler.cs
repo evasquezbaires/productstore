@@ -10,7 +10,7 @@ namespace ProductStore.Api.Domain.Handlers
     /// <summary>
     /// Class to operate with the Update command of existing products
     /// </summary>
-    public class ModifyProductCommandHandler : IRequestHandler<ProductUpdate>
+    public class ModifyProductCommandHandler : IRequestHandler<ProductUpdate, ProductQuery>
     {
         private readonly IProductRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -23,7 +23,7 @@ namespace ProductStore.Api.Domain.Handlers
             _mapper = mapper;
         }
 
-        public async Task Handle(ProductUpdate request, CancellationToken cancellationToken)
+        public async Task<ProductQuery> Handle(ProductUpdate request, CancellationToken cancellationToken)
         {
             try
             {
@@ -37,14 +37,14 @@ namespace ProductStore.Api.Domain.Handlers
                 existingProduct.UpdatedDate = DateTime.UtcNow;
 
                 await _unitOfWork.CommitAsync();
+
+                return new ProductQuery { Id = existingProduct.Id };
             }
             catch (Exception ex)
             {
                 await _unitOfWork.Rollback();
                 throw new DomainException(ex.Message);
             }
-
-            return;
         }
     }
 }

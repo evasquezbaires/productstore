@@ -8,7 +8,7 @@ namespace ProductStore.Api.Model
     /// Represents a class to write the product information.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class ProductWrite : ProductBase, IRequest
+    public class ProductWrite : ProductBase, IRequest<ProductQuery>
     {
         /// <summary>
         /// The current status of the product

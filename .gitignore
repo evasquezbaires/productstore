@@ -47,4 +47,6 @@ bld/
 
 
 *.db
+*.db-shm
+*.db-wal
 [Ll]ogs/

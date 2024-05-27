@@ -32,8 +32,8 @@ namespace ProductStore.Api.Test.Controllers
             var result = await _storeController.Insert(productWrite);
 
             // Assert
-            Assert.IsType<StatusCodeResult>(result);
-            var statusCodeResult = (StatusCodeResult)result;
+            Assert.IsType<ObjectResult>(result);
+            var statusCodeResult = (ObjectResult)result;
             Assert.Equal((int)HttpStatusCode.Created, statusCodeResult.StatusCode);
         }
 
@@ -49,7 +49,7 @@ namespace ProductStore.Api.Test.Controllers
             var result = await _storeController.Update(productId, productUpdate);
 
             // Assert
-            Assert.IsType<OkResult>(result);
+            Assert.IsType<OkObjectResult>(result);
         }
 
         [Fact]

@@ -36,8 +36,8 @@ namespace ProductStore.Api.Controllers
         [SwaggerResponse(500, "The request raised an internal server error that should be analyzed and resolved by the developers.")]
         public async Task<IActionResult> Insert([FromBody] ProductWrite request)
         {
-            await _mediator.Send(request);
-            return StatusCode((int)HttpStatusCode.Created);
+            var resultId = await _mediator.Send(request);
+            return StatusCode((int)HttpStatusCode.Created, resultId);
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace ProductStore.Api.Controllers
         public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ProductUpdate request)
         {
             request.Id = id;
-            await _mediator.Send(request);
-            return Ok();
+            var resultId = await _mediator.Send(request);
+            return Ok(resultId);
         }
 
         /// <summary>
